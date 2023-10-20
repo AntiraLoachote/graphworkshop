@@ -12,7 +12,11 @@ from user_manager.models import Node
 class NodeViewset(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     queryset = Node.objects.all()
 
-    def retrieve(request, *args, **kwargs):
+    def retrieve(self, request, *args, **kwargs):
+        # import ipdb;
+        # ipdb.set_trace()
+        fields = request.GET.get('fields')
+        print(fields)
         node = Node.objects.get(id=kwargs["pk"])
         print(node)
         return Response(status=status.HTTP_200_OK)
